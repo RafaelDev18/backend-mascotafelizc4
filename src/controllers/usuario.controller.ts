@@ -96,9 +96,9 @@ export class UsuarioController {
     let destino = usuario.email;
     let asunto = 'Registro en la plataforma Mascota Feliz';
     let contenido =`Hola ${usuario.nombres} ${usuario.apellidos}, su usuario de ingreso es: ${usuario.email} y su contraseña de ingreso es: ${clave}`
-    
+
     //Enviar correo
-    fetch("http://127.0.0.1:5000//envio-correo?cuerpo_correo=" + contenido + "&correo_destino=" + destino + "&asunto_correo=" + asunto)
+    fetch("https://servicio-mensajeria.vercel.app///envio-correo?cuerpo_correo=" + contenido + "&correo_destino=" + destino + "&asunto_correo=" + asunto)
     //fetch(`${Llaves.urlServicioNotificaciones}/envio-correo?=${destino}&asunto=${asunto}&contenido=${contenido}`)
       .then((data: any) => {
         console.log(data);
