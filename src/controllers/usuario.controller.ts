@@ -98,7 +98,7 @@ export class UsuarioController {
     let contenido =`Hola ${usuario.nombres} ${usuario.apellidos}, su usuario de ingreso es: ${usuario.email} y su contraseña de ingreso es: ${clave}`
 
     //Enviar correo
-    fetch("https://servicio-mensajeria.vercel.app///envio-correo?cuerpo_correo=" + contenido + "&correo_destino=" + destino + "&asunto_correo=" + asunto)
+    fetch("https://mensajeria-prod-mensajeria-mfc4-2vlmxr.mo6.mogenius.io/envio-correo?cuerpo_correo=" + contenido + "&correo_destino=" + destino + "&asunto_correo=" + asunto)
     //fetch(`${Llaves.urlServicioNotificaciones}/envio-correo?=${destino}&asunto=${asunto}&contenido=${contenido}`)
       .then((data: any) => {
         console.log(data);
