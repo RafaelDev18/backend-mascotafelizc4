@@ -17,6 +17,7 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
+import fetch from 'node-fetch';
 import {Prospecto} from '../models';
 import {ProspectoRepository} from '../repositories';
 
@@ -44,7 +45,21 @@ export class ProspectoController {
     })
     prospecto: Omit<Prospecto, 'id'>,
   ): Promise<Prospecto> {
-    return this.prospectoRepository.create(prospecto);
+    //return this.prospectoRepository.create(prospecto);
+    let p = await this.prospectoRepository.create(prospecto);
+
+    //Preparar Correo
+    let destino = "rafael.rico.18@hotmail.com";//usuario.email;
+    let asunto = `Contacto de ${prospecto.nombres} ${prospecto.apellidos}`;
+    let contenido = `Hola, el prospecto ${prospecto.nombres} ${prospecto.apellidos} ha dejado el siguiente comentario: ${prospecto.comentario}. Por favor responder al email ${prospecto.email} o al teléfono ${prospecto.telefono}.`;
+
+    fetch("https://mensajeria-prod-mensajeria-mfc4-2vlmxr.mo6.mogenius.io/envio-correo?cuerpo_correo=" + contenido + "&correo_destino=" + destino + "&asunto_correo=" + asunto)
+
+      .then((data: any)=>{
+        console.log(data);
+      })
+    return p;
+
   }
 
   @get('/prospectos/count')
